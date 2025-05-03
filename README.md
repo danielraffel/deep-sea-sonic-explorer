@@ -46,6 +46,43 @@ This application is built with:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Local Setup
+
+```sh
+git clone https://github.com/danielraffel/deep-sea-sonic-explorer.git
+cd deep-sea-sonic-explorer
+npm install
+npm start
+```
+
+- If you use a specific Node version, run `nvm use` (see .nvmrc).
+- If you ever need to reset dependencies:
+  ```sh
+  rm -rf node_modules package-lock.json
+  npm install
+  ```
+
+### 🚀 Deploying to GitHub Pages
+
+1. Make sure your `homepage` field in `package.json` is set to:
+   ```json
+   "homepage": "https://<your-username>.github.io/deep-sea-sonic-explorer"
+   ```
+2. Build the project:
+   ```sh
+   npm run build
+   ```
+3. Deploy to GitHub Pages:
+   ```sh
+   npm run deploy
+   ```
+4. **On GitHub:**
+   - Go to your repository settings → Pages.
+   - Set the source to the `gh-pages` branch and the root (`/`) folder.
+   - Save the settings.
+
+Your site will be live at the URL specified in the `homepage` field.
+
 ### Available Scripts
 
 In the project directory, you can run:
