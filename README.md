@@ -1,6 +1,6 @@
-<div style="text-align: center;">
+<p align="center">
   <img src="https://github.com/user-attachments/assets/694fc879-b357-4927-9c88-3271b7159645" alt="ChatGPT Image May 2, 2025 at 06_58_58 PM" width="25%" />
-</div>
+</p>
 
 # Deep Sea Sonic Explorer: Clarion-Clipperton Zone
 
