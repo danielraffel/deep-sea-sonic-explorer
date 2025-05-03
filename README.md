@@ -1,4 +1,9 @@
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/694fc879-b357-4927-9c88-3271b7159645" alt="ChatGPT Image May 2, 2025 at 06_58_58 PM" width="25%" />
+</div>
+
 # Deep Sea Sonic Explorer: Clarion-Clipperton Zone
+
 
 **Deep Sea Sonic Explorer** is an interactive web application that generates dynamic, ever-changing music based on oceanographic data from the Clarion-Clipperton Zone (CCZ) in the Pacific Ocean. It's a digital instrument that sonifies deep-sea environmental data and marine life into an evolving soundscape.
 
