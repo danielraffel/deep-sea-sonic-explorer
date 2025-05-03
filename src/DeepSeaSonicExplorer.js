@@ -45,88 +45,6 @@ const DeepSeaSonicExplorer = () => {
     { id: 'gummy-squirrel', name: 'Abyssal Gummy Squirrel', depth: [4800, 5500], frequency: 0.4, soundProfile: 'low-mid' }
   ];
   
-  // Initialize Tone.js instruments and effects
-  useEffect(() => {
-    // For production, we would initialize actual Tone.js elements here
-    // This is a simplified mock-up of what would be used
-    const audioSystem = {
-      // Base ambient track for the ocean environment
-      ambientSynth: new Tone.PolySynth(Tone.Synth, {
-        envelope: { attack: 0.5, decay: 1, sustain: 0.5, release: 3 }
-      }).toDestination(),
-      
-      // Synths for different marine life encounters
-      creatureSynths: {
-        'low': new Tone.MonoSynth({
-          oscillator: { type: 'sine' },
-          envelope: { attack: 1, decay: 1, sustain: 0.7, release: 4 }
-        }).toDestination(),
-        'mid': new Tone.MonoSynth({
-          oscillator: { type: 'triangle' },
-          envelope: { attack: 0.5, decay: 0.5, sustain: 0.7, release: 3 }
-        }).toDestination(),
-        'high': new Tone.MonoSynth({
-          oscillator: { type: 'sine4' },
-          envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 2 }
-        }).toDestination(),
-        'low-mid': new Tone.DuoSynth({
-          envelope: { attack: 0.5, decay: 0.5, sustain: 0.5, release: 2 }
-        }).toDestination(),
-        'mid-low': new Tone.FMSynth({
-          envelope: { attack: 0.3, decay: 0.5, sustain: 0.5, release: 2 }
-        }).toDestination(),
-        'mid-high': new Tone.AMSynth({
-          envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 1.5 }
-        }).toDestination(),
-        'high-mid': new Tone.PluckSynth().toDestination(),
-        'predator': new Tone.MonoSynth({
-          oscillator: { type: 'sawtooth' },
-          envelope: { attack: 0.01, decay: 0.1, sustain: 0.2, release: 0.5 }
-        }).toDestination()
-      },
-      
-      // Effects for environmental conditions
-      effects: {
-        reverb: new Tone.Reverb(5).toDestination(),
-        delay: new Tone.FeedbackDelay(0.5, 0.4).toDestination(),
-        filter: new Tone.Filter(500, "lowpass").toDestination()
-      },
-      
-      // Noise generators for water movement, currents, etc.
-      noise: new Tone.Noise("brown").toDestination()
-    };
-    
-    // Connect elements in the audio processing chain
-    Object.values(audioSystem.creatureSynths).forEach(synth => {
-      synth.connect(audioSystem.effects.reverb);
-    });
-    
-    audioSystem.noise.connect(audioSystem.effects.filter);
-    
-    setAudioElements(audioSystem);
-    
-    // Setup regular time update
-    const timeInterval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
-    
-    // Initialize Tone.js
-    Tone.start();
-    
-    // Cleanup function
-    return () => {
-      clearInterval(timeInterval);
-      
-      // Dispose Tone.js objects to prevent memory leaks
-      if (audioSystem) {
-        Object.values(audioSystem.creatureSynths).forEach(synth => synth.dispose());
-        Object.values(audioSystem.effects).forEach(effect => effect.dispose());
-        audioSystem.noise.dispose();
-        audioSystem.ambientSynth.dispose();
-      }
-    };
-  }, []);
-  
   // Determine which marine life might be present based on current parameters
   useEffect(() => {
     if (!isPlaying) return;
@@ -247,11 +165,63 @@ const DeepSeaSonicExplorer = () => {
   // Handle play/pause
   const togglePlayback = () => {
     if (!isPlaying) {
-      // Start Tone.js audio context
       Tone.start().then(() => {
+        // Create Tone.js objects only after Tone.start()
+        const audioSystem = {
+          ambientSynth: new Tone.PolySynth(Tone.Synth, {
+            envelope: { attack: 0.5, decay: 1, sustain: 0.5, release: 3 }
+          }).toDestination(),
+          creatureSynths: {
+            'low': new Tone.MonoSynth({
+              oscillator: { type: 'sine' },
+              envelope: { attack: 1, decay: 1, sustain: 0.7, release: 4 }
+            }).toDestination(),
+            'mid': new Tone.MonoSynth({
+              oscillator: { type: 'triangle' },
+              envelope: { attack: 0.5, decay: 0.5, sustain: 0.7, release: 3 }
+            }).toDestination(),
+            'high': new Tone.MonoSynth({
+              oscillator: { type: 'sine4' },
+              envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 2 }
+            }).toDestination(),
+            'low-mid': new Tone.DuoSynth({
+              envelope: { attack: 0.5, decay: 0.5, sustain: 0.5, release: 2 }
+            }).toDestination(),
+            'mid-low': new Tone.FMSynth({
+              envelope: { attack: 0.3, decay: 0.5, sustain: 0.5, release: 2 }
+            }).toDestination(),
+            'mid-high': new Tone.AMSynth({
+              envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 1.5 }
+            }).toDestination(),
+            'high-mid': new Tone.PluckSynth().toDestination(),
+            'predator': new Tone.MonoSynth({
+              oscillator: { type: 'sawtooth' },
+              envelope: { attack: 0.01, decay: 0.1, sustain: 0.2, release: 0.5 }
+            }).toDestination()
+          },
+          effects: {
+            reverb: new Tone.Reverb(5).toDestination(),
+            delay: new Tone.FeedbackDelay(0.5, 0.4).toDestination(),
+            filter: new Tone.Filter(500, "lowpass").toDestination()
+          },
+          noise: new Tone.Noise("brown").toDestination()
+        };
+        Object.values(audioSystem.creatureSynths).forEach(synth => {
+          synth.connect(audioSystem.effects.reverb);
+        });
+        audioSystem.noise.connect(audioSystem.effects.filter);
+        setAudioElements(audioSystem);
         setIsPlaying(true);
       });
     } else {
+      // Dispose Tone.js objects on stop
+      if (audioElements) {
+        Object.values(audioElements.creatureSynths).forEach(synth => synth.dispose());
+        Object.values(audioElements.effects).forEach(effect => effect.dispose());
+        audioElements.noise.dispose();
+        audioElements.ambientSynth.dispose();
+        setAudioElements(null);
+      }
       setIsPlaying(false);
     }
   };
