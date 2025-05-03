@@ -506,6 +506,8 @@ const DeepSeaSonicExplorer = () => {
         </p>
         <p className="mt-1">
           Sound generation uses real-time data mapping of depth, temperature, oxygen levels, and marine biodiversity
+          {' | '}
+          <a href="https://github.com/danielraffel/deep-sea-sonic-explorer/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-200">GitHub</a>
         </p>
       </footer>
     </div>
