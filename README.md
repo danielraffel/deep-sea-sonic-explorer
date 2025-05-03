@@ -64,24 +64,24 @@ npm start
 
 ### 🚀 Deploying to GitHub Pages
 
+This project uses GitHub Actions to automatically deploy to GitHub Pages whenever you push to the `main` branch. You do **not** need to run `npm run build` or `npm run deploy` manually.
+
 1. Make sure your `homepage` field in `package.json` is set to:
    ```json
    "homepage": "https://<your-username>.github.io/deep-sea-sonic-explorer"
    ```
-2. Build the project:
+2. Push your changes to the `main` branch:
    ```sh
-   npm run build
+   git add .
+   git commit -m "Your message"
+   git push origin main
    ```
-3. Deploy to GitHub Pages:
-   ```sh
-   npm run deploy
-   ```
-4. **On GitHub:**
+3. **On GitHub:**
    - Go to your repository settings → Pages.
-   - Set the source to the `gh-pages` branch and the root (`/`) folder.
+   - Set the source to the `gh-pages` branch and the root (`/`) folder (if not already set).
    - Save the settings.
 
-Your site will be live at the URL specified in the `homepage` field.
+The workflow in `.github/workflows/deploy.yml` will build and deploy your site automatically. Your site will be live at the URL specified in the `homepage` field.
 
 ### Available Scripts
 
