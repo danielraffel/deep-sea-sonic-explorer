@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/deep-sea-sonic-explorer/static/css/main.d351d301.css",
-    "main.js": "/deep-sea-sonic-explorer/static/js/main.505cf1b4.js",
+    "main.css": "/deep-sea-sonic-explorer/static/css/main.478fc52a.css",
+    "main.js": "/deep-sea-sonic-explorer/static/js/main.b52e7548.js",
     "static/js/453.cb4a865d.chunk.js": "/deep-sea-sonic-explorer/static/js/453.cb4a865d.chunk.js",
     "index.html": "/deep-sea-sonic-explorer/index.html",
-    "main.d351d301.css.map": "/deep-sea-sonic-explorer/static/css/main.d351d301.css.map",
-    "main.505cf1b4.js.map": "/deep-sea-sonic-explorer/static/js/main.505cf1b4.js.map",
+    "main.478fc52a.css.map": "/deep-sea-sonic-explorer/static/css/main.478fc52a.css.map",
+    "main.b52e7548.js.map": "/deep-sea-sonic-explorer/static/js/main.b52e7548.js.map",
     "453.cb4a865d.chunk.js.map": "/deep-sea-sonic-explorer/static/js/453.cb4a865d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d351d301.css",
-    "static/js/main.505cf1b4.js"
+    "static/css/main.478fc52a.css",
+    "static/js/main.b52e7548.js"
   ]
 }
