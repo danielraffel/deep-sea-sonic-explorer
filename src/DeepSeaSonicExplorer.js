@@ -51,26 +51,38 @@ const DeepSeaSonicExplorer = () => {
     // This is a simplified mock-up of what would be used
     const audioSystem = {
       // Base ambient track for the ocean environment
-      ambientSynth: new Tone.PolySynth().toDestination(),
+      ambientSynth: new Tone.PolySynth(Tone.Synth, {
+        envelope: { attack: 0.5, decay: 1, sustain: 0.5, release: 3 }
+      }).toDestination(),
       
       // Synths for different marine life encounters
       creatureSynths: {
         'low': new Tone.MonoSynth({
           oscillator: { type: 'sine' },
-          envelope: { attack: 2, decay: 1, sustain: 0.8, release: 8 }
+          envelope: { attack: 1, decay: 1, sustain: 0.7, release: 4 }
         }).toDestination(),
         'mid': new Tone.MonoSynth({
           oscillator: { type: 'triangle' },
-          envelope: { attack: 0.5, decay: 0.5, sustain: 0.7, release: 5 }
+          envelope: { attack: 0.5, decay: 0.5, sustain: 0.7, release: 3 }
         }).toDestination(),
         'high': new Tone.MonoSynth({
           oscillator: { type: 'sine4' },
-          envelope: { attack: 0.1, decay: 0.2, sustain: 0.5, release: 3 }
+          envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 2 }
         }).toDestination(),
-        'low-mid': new Tone.DuoSynth().toDestination(),
-        'mid-low': new Tone.FMSynth().toDestination(),
-        'mid-high': new Tone.AMSynth().toDestination(),
-        'high-mid': new Tone.PluckSynth().toDestination()
+        'low-mid': new Tone.DuoSynth({
+          envelope: { attack: 0.5, decay: 0.5, sustain: 0.5, release: 2 }
+        }).toDestination(),
+        'mid-low': new Tone.FMSynth({
+          envelope: { attack: 0.3, decay: 0.5, sustain: 0.5, release: 2 }
+        }).toDestination(),
+        'mid-high': new Tone.AMSynth({
+          envelope: { attack: 0.2, decay: 0.3, sustain: 0.5, release: 1.5 }
+        }).toDestination(),
+        'high-mid': new Tone.PluckSynth().toDestination(),
+        'predator': new Tone.MonoSynth({
+          oscillator: { type: 'sawtooth' },
+          envelope: { attack: 0.01, decay: 0.1, sustain: 0.2, release: 0.5 }
+        }).toDestination()
       },
       
       // Effects for environmental conditions
@@ -188,42 +200,31 @@ const DeepSeaSonicExplorer = () => {
     audioElements.ambientSynth.triggerAttackRelease(biomeChord, "8n");
     
     // For each active marine life, play its characteristic sound
+    const scaleMidi = [60, 62, 64, 65, 67, 69, 71, 72]; // C major
+    const predatorIds = ['gulper-eel', 'predatory-fish', 'giant-squid']; // Add your predator IDs here
     const playLifeSounds = () => {
       activeMarineLife.forEach(creature => {
-        const synth = audioElements.creatureSynths[creature.soundProfile];
+        let synth = audioElements.creatureSynths[creature.soundProfile];
+        let isPredator = predatorIds.includes(creature.id);
+        if (isPredator) synth = audioElements.creatureSynths['predator'];
         if (!synth) return;
-        
-        // Derive a note based on creature characteristics
-        let note;
-        switch(creature.soundProfile) {
-          case 'low':
-            note = Tone.Frequency("A1").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'mid':
-            note = Tone.Frequency("A2").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'high':
-            note = Tone.Frequency("A3").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'low-mid':
-            note = Tone.Frequency("D2").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'mid-low':
-            note = Tone.Frequency("G1").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'mid-high':
-            note = Tone.Frequency("E3").transpose(Math.floor(Math.random() * 12));
-            break;
-          case 'high-mid':
-            note = Tone.Frequency("B2").transpose(Math.floor(Math.random() * 12));
-            break;
-          default:
-            note = "C3";
-        }
-        
-        // Play the note with random timings to create organic feel
-        if (Math.random() < 0.3) { // Only play some sounds occasionally
-          synth.triggerAttackRelease(note, Math.random() * 2 + 0.1);
+        // Quantize to scale
+        let midi = scaleMidi[Math.floor(Math.random() * scaleMidi.length)];
+        if (isPredator) midi -= 12; // Lower octave for drama
+        let note = Tone.Frequency(midi, 'midi').toNote();
+        // Play with drama for predator
+        let now = Tone.now();
+        let offset = Math.random() * 0.05; // up to 50ms random offset
+        if (isPredator) {
+          synth.triggerAttackRelease(note, 1.5, now + offset, 1.0);
+          audioElements.effects.reverb.decay = 8;
+          audioElements.effects.filter.frequency.value = 200;
+        } else {
+          if (Math.random() < 0.5) {
+            synth.triggerAttackRelease(note, Math.random() * 1.2 + 0.3, now + offset, 0.5);
+          }
+          audioElements.effects.reverb.decay = 5;
+          audioElements.effects.filter.frequency.value = 300 + (temperature * 200);
         }
       });
     };
