@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Deep Sea Sonic Explorer: Clarion-Clipperton Zone
+
+**Deep Sea Sonic Explorer** is an interactive web application that generates dynamic, ever-changing music based on oceanographic data from the Clarion-Clipperton Zone (CCZ) in the Pacific Ocean. It's a digital instrument that sonifies deep-sea environmental data and marine life into an evolving soundscape.
+
+## 🌊 Project Overview
+
+This project transforms scientific data from one of Earth's most mysterious and remote regions into a captivating auditory experience:
+
+* **Geographic Scope**: Covers \~4.5 million km² between Hawaii and Mexico.
+* **Depths Modeled**: Simulates 4,000–5,500 meters below the ocean surface.
+* **Environmental Variables**: Temperature (\~1.5°C), oxygen levels, and other real-world metrics.
+* **Biome Features**: Includes abyssal plains, seamounts, fracture zones, and nodule fields.
+* **Biodiversity**: Inspired by the discovery of 5,000+ species in this region.
+
+## 🎛 Technical Implementation
+
+This application is built with:
+
+* **React** – Interactive front-end framework
+* **Tone.js** – Audio synthesis and sequencing
+* **Tailwind CSS** – Utility-first styling
+* **Lucide React** – Icon library
+
+**Sound Mapping Concepts**:
+
+* Synth types represent different marine life
+* Ambient sound beds reflect environmental data
+* Depth influences pitch and reverb
+* Probabilistic models drive marine creature "appearances"
+
+## 🎓 Educational & Artistic Value
+
+* **🧠 Data Sonification**: Scientific data made audible and experiential
+* **🌱 Environmental Awareness**: Highlights biodiversity and mining threats
+* **🎨 Generative Music**: Algorithmic sound evolving with data
+* **🕹 Interactive Learning**: Sound as a medium to understand remote ecosystems
+
+---
+
+## ⚙ Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in development mode.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+The page will reload when changes are made. Lint errors will appear in the console.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### `npm test`
 
-### `npm test`
+Launches the test runner in interactive watch mode.
+See [running tests](https://facebook.github.io/create-react-app/docs/running-tests).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### `npm run build`
 
-### `npm run build`
+Builds the app for production to the `build` folder.
+Optimized and minified with hashed filenames for deployment.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Learn more about [deployment](https://facebook.github.io/create-react-app/docs/deployment).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### `npm run eject`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+⚠️ Irreversible operation – exposes config files and build dependencies (Webpack, Babel, etc.).
+Use only if you need advanced customization.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 📚 Learn More
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* [Create React App Documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+* [React Documentation](https://reactjs.org/)
+* [Tone.js Documentation](https://tonejs.github.io/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Lucide React](https://lucide.dev/)
